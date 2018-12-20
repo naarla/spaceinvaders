@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>   
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    
+    <div id="myDiv"></div>
+    <script>
+
+        function readFile() {
+
+            
+
+            Plotly.d3.csv("https://github.com/naarla/spaceinvaders/blob/master/vid_sales_summary_1.csv",function (data) {
+
+                ArrPlatform = [];
+                TotalSales = []; 
+                for (var i = 0; i < data.length; i++) {
+                    ArrPlatform.push(data[i].Platform)
+                    TotalSales.push(parseFloat(data[i].TotalSales))
+                   
+                }
+
+                var trace1 = {
+                    x: ArrPlatform,
+                    y: TotalSales,
+                    title: 'Total Sales of Games Consoles by Platform',
+                    type: 'bar'
+                };
+
+                var data = [trace1];
+
+                var layout = { 
+                    barmode: 'group',
+                    title: 'Total Sales of Games Consoles by Platform',
+                    xaxis: {
+                    title: 'Platform',
+                    titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 18,
+                    color: 'lightgrey'
+                    }
+                    },
+                    yaxis: {
+                    title: 'Total Sales',
+                    titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 18,
+                    color: 'lightgrey'
+                    }
+                    }
+                    };
+
+                Plotly.newPlot('myDiv', data, layout);
+
+
+            });
+        }
+
+
+        readFile();
+
+
+    </script>
+</body>
+</html>
